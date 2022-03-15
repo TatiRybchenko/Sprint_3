@@ -19,12 +19,10 @@ public class CourierClient extends ScooterRestClient {
                 .when()
                 .post(COURIER_PATH +"/login")
                 .then();
-
-
     }
 
-    @Step("Creating a courier")
-    public ValidatableResponse create(Courier courier) {
+    @Step("Creating correct courier")
+    public ValidatableResponse createCorrect(Courier courier) {
         String courierLogin = courier.getLogin();
         String courierPassword = courier.getPassword();
         String courierFirstName = courier.getFirstName();
@@ -41,6 +39,25 @@ public class CourierClient extends ScooterRestClient {
                 .then();
 
     }
+
+    @Step("Creating Failed (No Login) courier")
+    public ValidatableResponse createFailed(Courier courier) {
+      //  String courierLogin = courier.getLogin();
+        String courierPassword = courier.getPassword();
+        String courierFirstName = courier.getFirstName();
+
+        String registerRequestBody = "{\"password\":\"" + courierPassword + "\","
+                + "\"firstName\":\"" + courierFirstName + "\"}";
+
+        return given()
+                .spec(getBaseSpec())
+                .body(registerRequestBody)
+                .when()
+                .post(COURIER_PATH)
+                .then();
+
+    }
+
     @Step("Delete the courier {courierId}")
     public ValidatableResponse delete(int courierId) {
                 return given()
@@ -49,6 +66,5 @@ public class CourierClient extends ScooterRestClient {
                 .when()
                 .delete(COURIER_PATH +"/" + courierId)
                 .then();
-
     }
 }

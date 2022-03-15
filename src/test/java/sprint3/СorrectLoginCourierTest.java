@@ -13,11 +13,10 @@ import static org.hamcrest.Matchers.*;
 
 import sptint3.Courier;
 import sptint3.CourierClient;
-import lombok.Data;
 import sptint3.CourierCredentials;
 
 
-public class LoginCourierTest {
+public class СorrectLoginCourierTest {
 
    private CourierClient courierClient;
    private Courier courier;
@@ -28,7 +27,7 @@ public class LoginCourierTest {
     public void setUp() {
         courierClient = new CourierClient();
         courier = Courier.getRandom();
-        courierClient.create(courier);
+        courierClient.createCorrect(courier);
     }
 
   @After
@@ -40,15 +39,14 @@ public class LoginCourierTest {
     @DisplayName("Create new courier")
     @Description("Create new courier and  what can login")
     public void courierCanLoginWithValidCredentials() {
-        // Courier courier = Courier.builder()
 
         ValidatableResponse loginResponse = courierClient.login(CourierCredentials.from(courier));
        int statusCode = loginResponse.extract().statusCode();
        courierId = loginResponse.extract().path("id");
 
-        System.out.println(courier.getLogin());
-        System.out.println(courier.getPassword());
-        System.out.println(courier.getFirstName());
+       // System.out.println(courier.getLogin());
+       // System.out.println(courier.getPassword());
+       // System.out.println(courier.getFirstName());
 
         assertThat("Courier completed login",statusCode,equalTo(200));
         assertThat("Courier ID is incorrect",courierId,is(not(0)));
