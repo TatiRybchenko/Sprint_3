@@ -23,18 +23,18 @@ public class Courier {
     @Step( "Create a random courier")
     public static Courier getRandom(){
 
-        final String login = RandomStringUtils.randomAlphabetic(10);
-        final String password = RandomStringUtils.randomAlphabetic(10);
-        final String firstName = RandomStringUtils.randomAlphabetic(10);
+        final String courierLogin = RandomStringUtils.randomAlphabetic(10);
+        final String courierPassword = RandomStringUtils.randomAlphabetic(10);
+        final String courierFirstName = RandomStringUtils.randomAlphabetic(10);
 
-        Allure.addAttachment("Login courier: ", login);
-        Allure.addAttachment("Password courier:", password);
-        Allure.addAttachment("FirstName courier", firstName);
+        Allure.addAttachment("Login courier: ", courierLogin);
+        Allure.addAttachment("Password courier:", courierPassword);
+        Allure.addAttachment("FirstName courier", courierFirstName);
 
-        return new Courier(login, password, firstName);
+        return new Courier(courierLogin, courierPassword, courierFirstName);
     }
 
-/*
+
     public String getLogin() {
         return login;
     }
@@ -58,5 +58,5 @@ public class Courier {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-*/
+
 }

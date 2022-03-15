@@ -1,53 +1,54 @@
 package sptint3;
 
 import io.qameta.allure.Step;
+import io.restassured.response.ValidatableResponse;
 
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class CourierClient extends ScooterRestClient {
 
-    private static final String COURIER_PATH = "/api/v1/courier/";
+    private static final String COURIER_PATH = "/api/v1/courier";
 
     @Step("Login by courier {credentials.login}")
-    public int login(CourierCredentials credentials){
+    public  ValidatableResponse login(CourierCredentials credentials){
         return given()
                 .spec(getBaseSpec())
                 .body(credentials)
                 .when()
-                .post(COURIER_PATH +"login")
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .path("id");
+                .post(COURIER_PATH +"/login")
+                .then();
+
 
     }
 
     @Step("Creating a courier")
-    public boolean create(Courier courier) {
+    public ValidatableResponse create(Courier courier) {
+        String courierLogin = courier.getLogin();
+        String courierPassword = courier.getPassword();
+        String courierFirstName = courier.getFirstName();
+
+        String registerRequestBody = "{\"login\":\"" + courierLogin + "\","
+                + "\"password\":\"" + courierPassword + "\","
+                + "\"firstName\":\"" + courierFirstName + "\"}";
+
         return given()
                 .spec(getBaseSpec())
-                .body(courier)
+                .body(registerRequestBody)
                 .when()
                 .post(COURIER_PATH)
-                .then().log().all()
-                .assertThat()
-                .statusCode(201)
-                .extract()
-                .path("ок");
+                .then();
+
     }
     @Step("Delete the courier {courierId}")
-    public boolean delete(int courierId) {
-                return given().log().all()
+    public ValidatableResponse delete(int courierId) {
+                return given()
                 .spec(getBaseSpec())
+                        .body(courierId)
                 .when()
-                .delete(COURIER_PATH + courierId)
-                .then().log().all()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .path("ок");
+                .delete(COURIER_PATH +"/" + courierId)
+                .then();
+
     }
 }
