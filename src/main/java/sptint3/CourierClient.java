@@ -42,7 +42,6 @@ public class CourierClient extends ScooterRestClient {
 
     @Step("Creating Failed (No Login) courier")
     public ValidatableResponse createFailed(Courier courier) {
-      //  String courierLogin = courier.getLogin();
         String courierPassword = courier.getPassword();
         String courierFirstName = courier.getFirstName();
 
