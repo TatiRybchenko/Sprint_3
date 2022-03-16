@@ -9,7 +9,7 @@ public class CourierClient extends ScooterRestClient {
 
     private static final String COURIER_PATH = "/api/v1/courier";
 
-    @Step("Выполнение запроса логина курьера, логин и пароль: {credentials.login}")
+    @Step("Выполнение запроса логина курьера, логин {credentials.login} и пароль {credentials.password}")
     public  ValidatableResponse login(CourierCredentials credentials){
         return given()
                 .spec(getBaseSpec())
