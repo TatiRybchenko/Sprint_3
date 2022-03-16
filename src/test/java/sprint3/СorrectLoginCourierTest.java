@@ -18,10 +18,9 @@ import sptint3.CourierCredentials;
 
 public class СorrectLoginCourierTest {
 
-   private CourierClient courierClient;
-   private Courier courier;
-   private int courierId;
-
+    private CourierClient courierClient;
+    private Courier courier;
+    private int courierId;
 
     @Before
     public void setUp() {
@@ -36,20 +35,16 @@ public class СorrectLoginCourierTest {
    }
 
     @Test
-    @DisplayName("Create new courier")
-    @Description("Create new courier and  what can login")
+    @DisplayName("Выполнение логина курьера с корректными значениями")
+    @Description("Выполнение логина курьера с корректными значениями. Корректные значения для создания и входа генерируется рандомно.")
     public void courierCanLoginWithValidCredentials() {
 
         ValidatableResponse loginResponse = courierClient.login(CourierCredentials.from(courier));
        int statusCode = loginResponse.extract().statusCode();
        courierId = loginResponse.extract().path("id");
 
-       // System.out.println(courier.getLogin());
-       // System.out.println(courier.getPassword());
-       // System.out.println(courier.getFirstName());
-
-        assertThat("Courier completed login",statusCode,equalTo(200));
-        assertThat("Courier ID is incorrect",courierId,is(not(0)));
+        assertThat("Курьер выполних логин, статус код:",statusCode,equalTo(200));
+        assertThat("Идентификатор курьера ID",courierId,is(not(0)));
 
     }
 

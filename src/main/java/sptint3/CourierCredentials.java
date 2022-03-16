@@ -1,5 +1,6 @@
 package sptint3;
 
+
 public class CourierCredentials {
 
     public String login;
@@ -13,16 +14,5 @@ public class CourierCredentials {
     public static CourierCredentials from(Courier courier) {
         return new CourierCredentials(courier.getLogin(), courier.getPassword());
     }
-
-
-  /*  public String getPassword() {
-        return password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-*/
-
-
 }
+

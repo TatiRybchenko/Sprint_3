@@ -2,10 +2,10 @@ package sptint3;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
+
 import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.lang3.RandomStringUtils;
-
 @Data
 @Builder
 public class Courier {
@@ -20,16 +20,16 @@ public class Courier {
         this.firstName = firstName;
     }
 
-    @Step( "Create a random courier")
+    @Step("Генерация рандомных значений (логина, пароля, имени) для создание акаунта курьера")
     public static Courier getRandom(){
 
         final String courierLogin = RandomStringUtils.randomAlphabetic(10);
         final String courierPassword = RandomStringUtils.randomAlphabetic(10);
         final String courierFirstName = RandomStringUtils.randomAlphabetic(10);
 
-        Allure.addAttachment("Login courier: ", courierLogin);
-        Allure.addAttachment("Password courier:", courierPassword);
-        Allure.addAttachment("FirstName courier", courierFirstName);
+        Allure.addAttachment("Логин курьера: ", courierLogin);
+        Allure.addAttachment("Пароль курьера:", courierPassword);
+        Allure.addAttachment("Имя курьера", courierFirstName);
 
         return new Courier(courierLogin, courierPassword, courierFirstName);
     }

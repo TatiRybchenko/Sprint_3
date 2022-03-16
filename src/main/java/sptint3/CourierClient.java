@@ -3,15 +3,13 @@ package sptint3;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
-
 import static io.restassured.RestAssured.given;
-
 
 public class CourierClient extends ScooterRestClient {
 
     private static final String COURIER_PATH = "/api/v1/courier";
 
-    @Step("Login by courier {credentials.login}")
+    @Step("Выполнение запроса логина курьера, логин и пароль: {credentials.login}")
     public  ValidatableResponse login(CourierCredentials credentials){
         return given()
                 .spec(getBaseSpec())
@@ -21,7 +19,7 @@ public class CourierClient extends ScooterRestClient {
                 .then();
     }
 
-    @Step("Creating correct courier")
+    @Step("Выполнение запроса на создание курьера со всеми параметрами: имя, логин, пароль.")
     public ValidatableResponse createCorrect(Courier courier) {
         String courierLogin = courier.getLogin();
         String courierPassword = courier.getPassword();
@@ -37,11 +35,10 @@ public class CourierClient extends ScooterRestClient {
                 .when()
                 .post(COURIER_PATH)
                 .then();
-
     }
 
-    @Step("Creating Failed (No Login) courier")
-    public ValidatableResponse createFailed(Courier courier) {
+    @Step("Выполнение запроса на создание курьера, у которого отсутствует один из параметров: логин")
+    public ValidatableResponse createFailedNoLogin(Courier courier) {
         String courierPassword = courier.getPassword();
         String courierFirstName = courier.getFirstName();
 
@@ -54,16 +51,47 @@ public class CourierClient extends ScooterRestClient {
                 .when()
                 .post(COURIER_PATH)
                 .then();
-
     }
 
-    @Step("Delete the courier {courierId}")
+    @Step("Выполнение запроса на создание курьера, у которого отсутствует один из параметров:  пароль")
+    public ValidatableResponse createFailedNoPassword(Courier courier) {
+        String courierLogin = courier.getLogin();
+        String courierFirstName = courier.getFirstName();
+
+        String registerRequestBody = "{\"login\":\"" + courierLogin + "\","
+                + "\"firstName\":\"" + courierFirstName + "\"}";
+
+        return given()
+                .spec(getBaseSpec())
+                .body(registerRequestBody)
+                .when()
+                .post(COURIER_PATH)
+                .then();
+    }
+
+    @Step("Выполнение запроса на создание курьера, у которого отсутствует один из апараметров: имя")
+    public ValidatableResponse createFailedNoFirstName(Courier courier) {
+        String courierLogin = courier.getLogin();
+        String courierPassword = courier.getPassword();
+
+        String registerRequestBody = "{\"login\":\"" + courierLogin + "\","
+                + "\"password\":\"" + courierPassword + "\"}";
+
+        return given()
+                .spec(getBaseSpec())
+                .body(registerRequestBody)
+                .when()
+                .post(COURIER_PATH)
+                .then();
+    }
+
+    @Step("Выполнение запроса на удаление курьера с его ID: {courierId}")
     public ValidatableResponse delete(int courierId) {
                 return given()
-                .spec(getBaseSpec())
+                        .spec(getBaseSpec())
                         .body(courierId)
-                .when()
-                .delete(COURIER_PATH +"/" + courierId)
-                .then();
+                        .when()
+                        .delete(COURIER_PATH +"/" + courierId)
+                        .then();
     }
 }
