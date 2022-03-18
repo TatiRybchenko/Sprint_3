@@ -10,7 +10,7 @@ public class ScooterRestClient {
 
     public static final String BASE_URL = "http://qa-scooter.praktikum-services.ru/";
 
-    protected RequestSpecification getBaseSpec() {
+    protected static RequestSpecification getBaseSpec() {
         return new RequestSpecBuilder()
                 .addFilter(new AllureRestAssured())
                 .setContentType(JSON)

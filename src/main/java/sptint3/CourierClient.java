@@ -25,13 +25,13 @@ public class CourierClient extends ScooterRestClient {
         String courierPassword = courier.getPassword();
         String courierFirstName = courier.getFirstName();
 
-        String registerRequestBody = "{\"login\":\"" + courierLogin + "\","
-                + "\"password\":\"" + courierPassword + "\","
-                + "\"firstName\":\"" + courierFirstName + "\"}";
+        String requestBodyCourierLogin = "{\"login\":\"" + courierLogin + "\","
+                                    + "\"password\":\"" + courierPassword + "\","
+                                    + "\"firstName\":\"" + courierFirstName + "\"}";
 
         return given()
                 .spec(getBaseSpec())
-                .body(registerRequestBody)
+                .body(requestBodyCourierLogin)
                 .when()
                 .post(COURIER_PATH)
                 .then();
@@ -42,12 +42,12 @@ public class CourierClient extends ScooterRestClient {
         String courierPassword = courier.getPassword();
         String courierFirstName = courier.getFirstName();
 
-        String registerRequestBody = "{\"password\":\"" + courierPassword + "\","
-                + "\"firstName\":\"" + courierFirstName + "\"}";
+        String requestBodyCourierLogin = "{\"password\":\"" + courierPassword + "\","
+                                    + "\"firstName\":\"" + courierFirstName + "\"}";
 
         return given()
                 .spec(getBaseSpec())
-                .body(registerRequestBody)
+                .body(requestBodyCourierLogin)
                 .when()
                 .post(COURIER_PATH)
                 .then();
@@ -58,12 +58,12 @@ public class CourierClient extends ScooterRestClient {
         String courierLogin = courier.getLogin();
         String courierFirstName = courier.getFirstName();
 
-        String registerRequestBody = "{\"login\":\"" + courierLogin + "\","
-                + "\"firstName\":\"" + courierFirstName + "\"}";
+        String requestBodyCourierLogin = "{\"login\":\"" + courierLogin + "\","
+                                    + "\"firstName\":\"" + courierFirstName + "\"}";
 
         return given()
                 .spec(getBaseSpec())
-                .body(registerRequestBody)
+                .body(requestBodyCourierLogin)
                 .when()
                 .post(COURIER_PATH)
                 .then();
@@ -74,12 +74,12 @@ public class CourierClient extends ScooterRestClient {
         String courierLogin = courier.getLogin();
         String courierPassword = courier.getPassword();
 
-        String registerRequestBody = "{\"login\":\"" + courierLogin + "\","
-                + "\"password\":\"" + courierPassword + "\"}";
+        String requestBodyCourierLogin = "{\"login\":\"" + courierLogin + "\","
+                                    + "\"password\":\"" + courierPassword + "\"}";
 
         return given()
                 .spec(getBaseSpec())
-                .body(registerRequestBody)
+                .body(requestBodyCourierLogin)
                 .when()
                 .post(COURIER_PATH)
                 .then();
@@ -87,9 +87,10 @@ public class CourierClient extends ScooterRestClient {
 
     @Step("Выполнение запроса на удаление курьера с его ID: {courierId}")
     public ValidatableResponse delete(int courierId) {
-                return given()
+        String requestBodyCourierID = "{\"id\":\"" + courierId + "\"}";
+                        return given()
                         .spec(getBaseSpec())
-                        .body(courierId)
+                        .body(requestBodyCourierID)
                         .when()
                         .delete(COURIER_PATH +"/" + courierId)
                         .then();

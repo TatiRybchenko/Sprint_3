@@ -1,6 +1,7 @@
 package sprint3;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -19,8 +20,7 @@ import sptint3.CourierCredentials;
 
 public class FailedLoginCourierTest {
     private CourierClient courierClient;
-    //private Courier courier;
-   // private String courierId;
+
 
     @Before
     public void setUp() {
@@ -46,6 +46,7 @@ public class FailedLoginCourierTest {
     @Test
     @DisplayName("Выполнение логина курьера с некорректными значениями")
     @Description("Выполнение логина курьера с некорректными значениями. Отсутствует параметр для входа: пароль")
+    @Issue("Тест написан корректно, информация о некорректном поведение системы передана в поддержку для исправления от ")
     public void courierFailedLoginCredentialsNoPassword() {
         Courier courier = Courier.builder()
                 .login(RandomStringUtils.randomAlphabetic(10))
