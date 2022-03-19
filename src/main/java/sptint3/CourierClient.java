@@ -87,12 +87,19 @@ public class CourierClient extends ScooterRestClient {
 
     @Step("Выполнение запроса на удаление курьера с его ID: {courierId}")
     public ValidatableResponse delete(int courierId) {
-        String requestBodyCourierID = "{\"id\":\"" + courierId + "\"}";
-                        return given()
-                        .spec(getBaseSpec())
-                        .body(requestBodyCourierID)
-                        .when()
-                        .delete(COURIER_PATH +"/" + courierId)
-                        .then();
+                return given()
+                .spec(getBaseSpec())
+                .when()
+                .delete(COURIER_PATH +"/" + courierId)
+                .then();
+    }
+
+    @Step("Выполнение запроса на удаление курьера с его ID: {courierId}")
+    public ValidatableResponse deleteFailedINull(int courierId) {
+               return given()
+                .spec(getBaseSpec())
+                .when()
+                .delete(COURIER_PATH +"/")
+                .then();
     }
 }

@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 public class GetListOrdersTest {
 
     private OrdersClient ordersClient;
-    public List<String> ordersStatus;
+    private List<String> ordersStatus;
 
 
     @Before
@@ -34,7 +34,6 @@ public class GetListOrdersTest {
        ordersStatus = Collections.singletonList(String.valueOf(createResponse.extract().body()));
 
         assertThat("Успешное выполнение запроса на получение списка заказов, статус код:",statusCode,equalTo(200));
-  //  assertThat("orders.status",ordersStatus, equalTo (0));
         assertThat("Значение возвращаемого тела не пустое",ordersStatus, notNullValue());
     }
 

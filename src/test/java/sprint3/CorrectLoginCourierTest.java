@@ -16,7 +16,7 @@ import sptint3.CourierClient;
 import sptint3.CourierCredentials;
 
 
-public class СorrectLoginCourierTest {
+public class CorrectLoginCourierTest {
 
     private CourierClient courierClient;
     private Courier courier;
@@ -35,8 +35,8 @@ public class СorrectLoginCourierTest {
    }
 
     @Test
-    @DisplayName("Выполнение логина курьера с корректными значениями")
-    @Description("Выполнение логина курьера с корректными значениями. Корректные значения для создания и входа генерируется рандомно.")
+    @DisplayName("Выполнение запроса на выполнение логина курьера с корректными значениями")
+    @Description("Выполнение запроса на выполнение логина курьера с корректными значениями. Корректные значения для создания и входа генерируется рандомно.")
     public void courierCanLoginWithValidCredentials() {
 
         ValidatableResponse loginResponse = courierClient.login(CourierCredentials.from(courier));

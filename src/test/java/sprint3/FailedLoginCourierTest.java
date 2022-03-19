@@ -28,7 +28,7 @@ public class FailedLoginCourierTest {
             }
 
     @Test
-    @DisplayName("Выполнение логина курьера с некорректными значениями")
+    @DisplayName("Выполнение логина курьера с некорректными значениями, нет логина")
     @Description("Выполнение логина курьера с некорректными значениями. Отсутствует параметр для входа: логин")
     public void courierFailedLoginCredentialsNoLogin() {
         Courier courier = Courier.builder()
@@ -44,9 +44,9 @@ public class FailedLoginCourierTest {
     }
 
     @Test
-    @DisplayName("Выполнение логина курьера с некорректными значениями")
+    @DisplayName("Выполнение логина курьера с некорректными значениями, нет пароля")
     @Description("Выполнение логина курьера с некорректными значениями. Отсутствует параметр для входа: пароль")
-    @Issue("Тест написан корректно, информация о некорректном поведение системы передана в поддержку для исправления от ")
+    @Issue("Тест написан корректно, информация о некорректном поведение системы передана в поддержку для исправления")
     public void courierFailedLoginCredentialsNoPassword() {
         Courier courier = Courier.builder()
                 .login(RandomStringUtils.randomAlphabetic(10))
@@ -62,7 +62,7 @@ public class FailedLoginCourierTest {
     }
 
     @Test
-    @DisplayName("Выполнение логина курьера с некорректными значениями")
+    @DisplayName("Выполнение логина курьера с некорректными значениями, нет пароля и логина.")
     @Description("Выполнение логина курьера с некорректными значениями. Несуществующая параметры: пароль и логин")
     public void courierFailedLoginCredentialsNoPasswordNoLogin() {
         Courier courier = Courier.builder()

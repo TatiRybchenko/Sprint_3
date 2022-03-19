@@ -20,7 +20,7 @@ public class Courier {
         this.firstName = firstName;
     }
 
-    @Step("Генерация рандомных значений (логина, пароля, имени) для создание акаунта курьера")
+    @Step("Генерация рандомных значений (логина, пароля, имени) для создания акаунта курьера")
     public static Courier getRandom(){
 
         final String courierLogin = RandomStringUtils.randomAlphabetic(10);
@@ -34,29 +34,5 @@ public class Courier {
         return new Courier(courierLogin, courierPassword, courierFirstName);
     }
 
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
 }

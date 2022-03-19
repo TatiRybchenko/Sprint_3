@@ -25,7 +25,7 @@ public class CorrectCreateOrdersTest  {
 
      private final List<String> colorScooter;
      private OrdersClient ordersClient;
-     //private Orders orders;
+     private Orders orders;
      private int trackId;
 
      public CorrectCreateOrdersTest(List<String> colorScooter) {
