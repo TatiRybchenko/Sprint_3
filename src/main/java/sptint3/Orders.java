@@ -31,7 +31,7 @@ public class Orders {
         this.comment = comment;
         this.color = color;
     }
-
+    public Orders (){}
 
 
 }

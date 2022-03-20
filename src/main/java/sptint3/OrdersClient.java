@@ -5,6 +5,8 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
 
+import java.lang.reflect.Type;
+
 import static io.restassured.RestAssured.given;
 
 public class OrdersClient extends ScooterRestClient {
@@ -30,10 +32,10 @@ public class OrdersClient extends ScooterRestClient {
                 .when()
                 .get(ORDERS_PATH + "?courierId")
                 .then();
+
     }
 
     @Step("Выполнение запроса на отмену заказа, номер трека {trackId} ")
-
     public static ValidatableResponse cancelCorrectOrders(int trackId){
 
         return given()

@@ -13,7 +13,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class GetListOrdersTest {
+public class GetListOrdersTest<ordersStatus> {
 
     private OrdersClient ordersClient;
     private List<String> ordersStatus;
@@ -31,7 +31,8 @@ public class GetListOrdersTest {
 
         ValidatableResponse createResponse = ordersClient.orderListAllActive();
         int statusCode = createResponse.extract().statusCode();
-       ordersStatus = Collections.singletonList(String.valueOf(createResponse.extract().body()));
+
+       List<String> ordersStatus = Collections.singletonList(String.valueOf(createResponse.extract().body()));
 
         assertThat("Успешное выполнение запроса на получение списка заказов, статус код:",statusCode,equalTo(200));
         assertThat("Значение возвращаемого тела не пустое",ordersStatus, notNullValue());

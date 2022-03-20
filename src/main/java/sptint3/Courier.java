@@ -34,5 +34,5 @@ public class Courier {
         return new Courier(courierLogin, courierPassword, courierFirstName);
     }
 
-
+    public Courier (){}
 }

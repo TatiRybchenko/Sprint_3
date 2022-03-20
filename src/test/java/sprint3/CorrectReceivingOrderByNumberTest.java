@@ -1,4 +1,3 @@
-
 package sprint3;
 
 import io.qameta.allure.Description;
@@ -20,7 +19,7 @@ import static org.hamcrest.Matchers.*;
 public class CorrectReceivingOrderByNumberTest {
 
     private CourierClient courierClient;
-    private List<String> ordersStatus_1;
+    private List<String> ordersStatusBody;
     private Courier courier;
     private OrdersClient ordersClient;
     private Orders orders;
@@ -64,10 +63,10 @@ public class CorrectReceivingOrderByNumberTest {
 
         ValidatableResponse receivingOrderResponse = OrdersClient.receivingOrderByNumber(trackId);
         int statusCode = receivingOrderResponse.extract().statusCode();
-        ordersStatus_1 = Collections.singletonList(String.valueOf(receivingOrderResponse.extract().body()));
+        ordersStatusBody = Collections.singletonList(String.valueOf(receivingOrderResponse.extract().body()));
 
         assertThat("Запрос на получение заказа по его номеру выполнен, статус код:",statusCode,equalTo(200));
-        assertThat("Значение возвращаемого тела не пустое",ordersStatus_1, notNullValue());
+        assertThat("Значение возвращаемого тела не пустое",ordersStatusBody, notNullValue());
 
     }
 }
