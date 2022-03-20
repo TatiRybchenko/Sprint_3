@@ -7,10 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import sptint3.*;
-
 import java.util.Collections;
 import java.util.List;
-
 import static java.lang.String.valueOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -47,7 +45,6 @@ public class CorrectReceivingOrderByNumberTest {
                 .build();
         ValidatableResponse createResponse = ordersClient.createCorrectOrders(orders);
         trackId = createResponse.extract().path("track");
-
     }
 
     @After

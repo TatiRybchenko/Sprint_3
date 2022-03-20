@@ -35,17 +35,6 @@ public class OrdersClient extends ScooterRestClient {
 
     }
 
-    @Step("Выполнение запроса на отмену заказа, номер трека {trackId} ")
-    public static ValidatableResponse cancelCorrectOrders(int trackId){
-
-        return given()
-                .spec(getBaseSpec())
-                .queryParam("track", trackId)
-                .when()
-                .put(ORDERS_PATH + "/cancel")
-                .then();
-    }
-
     @Step("Выполнение запроса на получение заказа по его номеру, номер трека {trackId} ")
 
     public static ValidatableResponse receivingOrderByNumber(int trackId){
@@ -68,20 +57,14 @@ public class OrdersClient extends ScooterRestClient {
                 .get(ORDERS_PATH + "/track")
                 .then();
     }
+    @Step("Выполнение запроса на отмену заказа, номер трека {trackId} ")
+    public static ValidatableResponse cancelCorrectOrders(int trackId){
 
-    /*
-    @Step("Выполнение запроса на принятие заказа, номер трека {trackId} ")
-
-    public static ValidatableResponse acceptCorrectOrders(accept){
-      //  String requestBodyTrackID = "{\"track\":" + trackId + "}";
         return given()
                 .spec(getBaseSpec())
-                .queryParam("parameter1", trackId)
-                .queryParam("parameter2", courierId)
+                .queryParam("track", trackId)
                 .when()
-                .put(ORDERS_PATH + "/accept/"+ "?courierId="+ trackId)
+                .put(ORDERS_PATH + "/cancel")
                 .then();
     }
-*/
-
 }

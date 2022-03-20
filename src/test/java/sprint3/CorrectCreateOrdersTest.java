@@ -3,22 +3,19 @@ package sprint3;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-
 import sptint3.Orders;
 import sptint3.OrdersClient;
-
 import static java.lang.String.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
 import java.util.List;
+
+
 
 @RunWith(Parameterized.class)
 public class CorrectCreateOrdersTest  {

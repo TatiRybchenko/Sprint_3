@@ -6,11 +6,8 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-
-
 import sptint3.Courier;
 import sptint3.CourierClient;
 import sptint3.CourierCredentials;

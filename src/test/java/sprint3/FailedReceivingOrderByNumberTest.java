@@ -21,7 +21,7 @@ public class FailedReceivingOrderByNumberTest {
     private OrdersClient ordersClient;
     private Orders orders;
     private int courierId;
-    private  int trackId;
+    private int trackId;
 
     @Before
     public void setUp() {

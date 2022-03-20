@@ -5,22 +5,18 @@ import io.qameta.allure.Issue;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
-
-
 import sptint3.Courier;
 import sptint3.CourierClient;
 import sptint3.CourierCredentials;
 
 public class FailedLoginCourierTest {
-    private CourierClient courierClient;
 
+    private CourierClient courierClient;
 
     @Before
     public void setUp() {

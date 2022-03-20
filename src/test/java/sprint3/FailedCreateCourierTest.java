@@ -8,10 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 import sptint3.Courier;
 import sptint3.CourierClient;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
+
+
 
 public class FailedCreateCourierTest {
 
@@ -27,14 +28,13 @@ public class FailedCreateCourierTest {
     @Description("Необходимо описание теста")
     public void courierFailedCredentialsNoLogin() {
      Courier courier = Courier.builder()
-            .password(RandomStringUtils.randomAlphabetic(10))
+             .password(RandomStringUtils.randomAlphabetic(10))
              .firstName(RandomStringUtils.randomAlphabetic(10))
-                .build();
+             .build();
 
       ValidatableResponse createResponse = courierClient.createCorrect(courier);
-        int statusCode = createResponse.extract().statusCode();
-
-        String errorMessage = createResponse.extract().path("message");
+      int statusCode = createResponse.extract().statusCode();
+      String errorMessage = createResponse.extract().path("message");
 
       assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(409));
       assertEquals("Этот логин уже используется. Попробуйте другой.",errorMessage);
@@ -48,14 +48,11 @@ public class FailedCreateCourierTest {
 
         ValidatableResponse createResponse = courierClient.createFailedNoLogin(courier);
         int statusCode = createResponse.extract().statusCode();
-
         String errorMessage = createResponse.extract().path("message");
 
         assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(400));
         assertEquals("Недостаточно данных для создания учетной записи",errorMessage);
     }
-
-
 
     @Test
     @DisplayName("Создание курьера, у которого отсутствует один из передаваемых параметров для создания: пароль")
@@ -65,7 +62,6 @@ public class FailedCreateCourierTest {
 
         ValidatableResponse createResponse = courierClient.createFailedNoPassword(courier);
         int statusCode = createResponse.extract().statusCode();
-
         String errorMessage = createResponse.extract().path("message");
 
         assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(400));
