@@ -3,22 +3,18 @@ package sprint3;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import sptint3.Courier;
 import sptint3.CourierClient;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class СorrectCreateCourierTest {
+public class CorrectCreateCourierTest {
 
     private CourierClient courierClient;
     private Courier courier;
-
 
     @Before
     public void setUp() {
@@ -33,7 +29,6 @@ public class СorrectCreateCourierTest {
 
         ValidatableResponse createResponse = courierClient.createCorrect(courier);
         int statusCode = createResponse.extract().statusCode();
-
         boolean courierOk = createResponse.extract().path("ok");
 
         assertThat("Создание курьера выполнилось без ошибок, статус код:",statusCode,equalTo(201));
@@ -47,7 +42,6 @@ public class СorrectCreateCourierTest {
 
         ValidatableResponse createResponse = courierClient.createFailedNoFirstName(courier);
         int statusCode = createResponse.extract().statusCode();
-
         boolean courierOk = createResponse.extract().path("ok");
 
         assertThat("Создание курьера выполнилось без ошибок, статус код:",statusCode,equalTo(201));
