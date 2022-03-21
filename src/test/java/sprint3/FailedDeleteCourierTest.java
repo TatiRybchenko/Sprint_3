@@ -10,6 +10,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import sptint3.CourierClient;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 
 
 
@@ -33,7 +35,7 @@ public class FailedDeleteCourierTest {
         int statusCode = deleteResponse.extract().statusCode();
         String errorMessage = deleteResponse.extract().path("message");
 
-        assertThat("Удаление курьера не выполнилось, статус код:",statusCode,equalTo(404));
+        assertThat("Удаление курьера не выполнилось, статус код:",statusCode,equalTo(SC_NOT_FOUND));
         assertEquals("Курьера с таким id нет.",errorMessage);
     }
 
@@ -47,7 +49,7 @@ public class FailedDeleteCourierTest {
         int statusCode = deleteResponse.extract().statusCode();
         String errorMessage = deleteResponse.extract().path("message");
 
-        assertThat("Удаление курьера не выполнилось, статус код:",statusCode,equalTo(400));
+        assertThat("Удаление курьера не выполнилось, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
         assertEquals("Недостаточно данных для удаления курьера",errorMessage);
     }
 }

@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.*;
 import sptint3.Courier;
 import sptint3.CourierClient;
 import sptint3.CourierCredentials;
+import static org.apache.http.HttpStatus.SC_OK;
 
 
 public class CorrectLoginCourierTest {
@@ -40,7 +41,7 @@ public class CorrectLoginCourierTest {
        int statusCode = loginResponse.extract().statusCode();
        courierId = loginResponse.extract().path("id");
 
-        assertThat("Курьер выполних логин, статус код:",statusCode,equalTo(200));
+        assertThat("Курьер выполних логин, статус код:",statusCode,equalTo(SC_OK));
         assertThat("Идентификатор курьера ID",courierId,is(not(0)));
 
     }

@@ -12,6 +12,7 @@ import java.util.List;
 import static java.lang.String.valueOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.apache.http.HttpStatus.SC_OK;
 
 
 public class CorrectReceivingOrderByNumberTest {
@@ -62,7 +63,7 @@ public class CorrectReceivingOrderByNumberTest {
         int statusCode = receivingOrderResponse.extract().statusCode();
         ordersStatusBody = Collections.singletonList(String.valueOf(receivingOrderResponse.extract().body()));
 
-        assertThat("Запрос на получение заказа по его номеру выполнен, статус код:",statusCode,equalTo(200));
+        assertThat("Запрос на получение заказа по его номеру выполнен, статус код:",statusCode,equalTo(SC_OK));
         assertThat("Значение возвращаемого тела не пустое",ordersStatusBody, notNullValue());
 
     }

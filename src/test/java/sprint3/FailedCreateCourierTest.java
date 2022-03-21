@@ -11,7 +11,8 @@ import sptint3.CourierClient;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
-
+import static org.apache.http.HttpStatus.SC_CONFLICT;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 
 
 public class FailedCreateCourierTest {
@@ -27,7 +28,8 @@ public class FailedCreateCourierTest {
      @DisplayName("Создание курьера, у которого один из параметров, уже используется в системе: логин = null")
     @Description("Необходимо описание теста")
     public void courierFailedCredentialsNoLogin() {
-     Courier courier = Courier.builder()
+
+        Courier courier = Courier.builder()
              .password(RandomStringUtils.randomAlphabetic(10))
              .firstName(RandomStringUtils.randomAlphabetic(10))
              .build();
@@ -36,7 +38,7 @@ public class FailedCreateCourierTest {
       int statusCode = createResponse.extract().statusCode();
       String errorMessage = createResponse.extract().path("message");
 
-      assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(409));
+      assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(SC_CONFLICT));
       assertEquals("Этот логин уже используется. Попробуйте другой.",errorMessage);
       }
 
@@ -50,7 +52,7 @@ public class FailedCreateCourierTest {
         int statusCode = createResponse.extract().statusCode();
         String errorMessage = createResponse.extract().path("message");
 
-        assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(400));
+        assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
         assertEquals("Недостаточно данных для создания учетной записи",errorMessage);
     }
 
@@ -64,7 +66,7 @@ public class FailedCreateCourierTest {
         int statusCode = createResponse.extract().statusCode();
         String errorMessage = createResponse.extract().path("message");
 
-        assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(400));
+        assertThat("Создание курьера не выполнилось, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
         assertEquals("Недостаточно данных для создания учетной записи",errorMessage);
     }
 }

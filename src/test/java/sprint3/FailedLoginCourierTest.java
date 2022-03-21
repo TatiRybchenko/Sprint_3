@@ -13,6 +13,9 @@ import static org.junit.Assert.assertEquals;
 import sptint3.Courier;
 import sptint3.CourierClient;
 import sptint3.CourierCredentials;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+
 
 public class FailedLoginCourierTest {
 
@@ -27,6 +30,7 @@ public class FailedLoginCourierTest {
     @DisplayName("Выполнение логина курьера с некорректными значениями, нет логина")
     @Description("Выполнение логина курьера с некорректными значениями. Отсутствует параметр для входа: логин")
     public void courierFailedLoginCredentialsNoLogin() {
+
         Courier courier = Courier.builder()
                 .password(RandomStringUtils.randomAlphabetic(10))
                 .build();
@@ -35,7 +39,7 @@ public class FailedLoginCourierTest {
         int statusCode = loginResponse.extract().statusCode();
         String errorMessage = loginResponse.extract().path("message");
 
-        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(400));
+        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
         assertEquals("Недостаточно данных для входа",errorMessage);
     }
 
@@ -44,6 +48,7 @@ public class FailedLoginCourierTest {
     @Description("Выполнение логина курьера с некорректными значениями. Отсутствует параметр для входа: пароль")
     @Issue("Тест написан корректно, информация о некорректном поведение системы передана в поддержку для исправления")
     public void courierFailedLoginCredentialsNoPassword() {
+
         Courier courier = Courier.builder()
                 .login(RandomStringUtils.randomAlphabetic(10))
                 .build();
@@ -52,7 +57,7 @@ public class FailedLoginCourierTest {
         int statusCode = loginResponse.extract().statusCode();
         String errorMessage = loginResponse.extract().path("message");
 
-        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(400));
+        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
         assertEquals("Недостаточно данных для входа",errorMessage);
 
     }
@@ -61,6 +66,7 @@ public class FailedLoginCourierTest {
     @DisplayName("Выполнение логина курьера с некорректными значениями, нет пароля и логина.")
     @Description("Выполнение логина курьера с некорректными значениями. Несуществующая параметры: пароль и логин")
     public void courierFailedLoginCredentialsNoPasswordNoLogin() {
+
         Courier courier = Courier.builder()
                 .login(RandomStringUtils.randomAlphabetic(10))
                 .password(RandomStringUtils.randomAlphabetic(10))
@@ -70,7 +76,7 @@ public class FailedLoginCourierTest {
         int statusCode = loginResponse.extract().statusCode();
         String errorMessage = loginResponse.extract().path("message");
 
-        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(404));
+        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(SC_NOT_FOUND));
         assertEquals("Учетная запись не найдена",errorMessage);
 
     }

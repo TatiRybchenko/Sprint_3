@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
 import sptint3.Courier;
 import sptint3.CourierClient;
 import sptint3.CourierCredentials;
+import static org.apache.http.HttpStatus.SC_OK;
 
 
 public class CorrectDeleteCourierTest {
@@ -37,7 +38,7 @@ public class CorrectDeleteCourierTest {
         int statusCode = deleteResponse.extract().statusCode();
         boolean courierOk = deleteResponse.extract().path("ok");
 
-        assertThat("Удаление курьера выполнилось без ошибок, статус код:",statusCode,equalTo(200));
+        assertThat("Удаление курьера выполнилось без ошибок, статус код:",statusCode,equalTo(SC_OK));
         assertTrue("Корреткное сообщениео завершение создания",courierOk);
 
     }

@@ -24,7 +24,7 @@ public class OrdersClient extends ScooterRestClient {
                 .then();
 }
 
-    @Step("Выполнение запроса на получение списка заказов: все активные и завершенные заказы курьера")
+    @Step("Выполнение запроса на получение списка заказов: успешный запрос без courierId ")
     public  ValidatableResponse orderListAllActive(){
 
         return given()
@@ -36,7 +36,6 @@ public class OrdersClient extends ScooterRestClient {
     }
 
     @Step("Выполнение запроса на получение заказа по его номеру, номер трека {trackId} ")
-
     public static ValidatableResponse receivingOrderByNumber(int trackId){
 
         return given()
@@ -46,8 +45,8 @@ public class OrdersClient extends ScooterRestClient {
                 .get(ORDERS_PATH + "/track")
                 .then();
     }
-    @Step("Выполнение запроса на получение заказа без номера трека")
 
+    @Step("Выполнение запроса на получение заказа без номера трека")
     public static ValidatableResponse receivingOrderNoNumber(){
 
         return given()
@@ -65,6 +64,17 @@ public class OrdersClient extends ScooterRestClient {
                 .queryParam("track", trackId)
                 .when()
                 .put(ORDERS_PATH + "/cancel")
+                .then();
+    }
+
+    @Step("Выполнение запроса на принятие заказа по id заказа {orderId} и id курьера {courierId} ")
+    public static ValidatableResponse acceptOrderByNumber(int trackId){
+
+        return given()
+                .spec(getBaseSpec())
+                .queryParam("t", trackId)
+                .when()
+                .get(ORDERS_PATH + "/track")
                 .then();
     }
 }

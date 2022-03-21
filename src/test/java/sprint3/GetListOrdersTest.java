@@ -6,16 +6,15 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
 import org.junit.Test;
 import sptint3.OrdersClient;
-import java.util.Collections;
-import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.apache.http.HttpStatus.SC_OK;
+
 
 public class GetListOrdersTest {
 
     private OrdersClient ordersClient;
-    private List<String> ordersStatus;
-
+    private String ordersListId;
 
     @Before
     public void setUp() {
@@ -24,15 +23,15 @@ public class GetListOrdersTest {
 
     @Test
     @DisplayName("Выполнение запроса на получение списка заказов")
-    @Description("Выполнение запроса на получение списка заказа: Все активные или все завершенные заказы")
+    @Description("Выполнение запроса на получение списка заказа: Успешный запрос без courierID")
     public void ordersCreateWithValidCredentials()     {
 
-        ValidatableResponse createResponse = ordersClient.orderListAllActive();
-        int statusCode = createResponse.extract().statusCode();
-        List<String> ordersStatus = Collections.singletonList(String.valueOf(createResponse.extract().body()));
+        ValidatableResponse createOrderResponse = ordersClient.orderListAllActive();
+        int statusCode = createOrderResponse.extract().statusCode();
+        String ordersListId = createOrderResponse.extract().jsonPath().getString("orders.id");
 
-        assertThat("Успешное выполнение запроса на получение списка заказов, статус код:",statusCode,equalTo(200));
-        assertThat("Значение возвращаемого тела не пустое",ordersStatus, notNullValue());
+        assertThat("Успешное выполнение запроса на получение списка заказов, статус код:",statusCode,equalTo(SC_OK));
+        assertThat("Значение возвращаемого тела не пустое",ordersListId, notNullValue());
     }
 
 }

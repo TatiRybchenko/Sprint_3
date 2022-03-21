@@ -12,6 +12,8 @@ import static java.lang.String.valueOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 
 
 public class FailedReceivingOrderByNumberTest {
@@ -61,7 +63,7 @@ public class FailedReceivingOrderByNumberTest {
         int statusCode = receivingOrderResponse.extract().statusCode();
         String errorMessage = receivingOrderResponse.extract().path("message");
 
-        assertThat("Получить заказ по его номеру не получилось, статус код:",statusCode,equalTo(400));
+        assertThat("Получить заказ по его номеру не получилось, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
         assertEquals("Недостаточно данных для поиска",errorMessage);
     }
 
@@ -74,7 +76,7 @@ public class FailedReceivingOrderByNumberTest {
         int statusCode = receivingOrderResponse.extract().statusCode();
         String errorMessage = receivingOrderResponse.extract().path("message");
 
-        assertThat("Получить заказ по его номеру не получилось, статус код:",statusCode,equalTo(404));
+        assertThat("Получить заказ по его номеру не получилось, статус код:",statusCode,equalTo(SC_NOT_FOUND));
         assertEquals("Заказ не найден",errorMessage);
     }
 

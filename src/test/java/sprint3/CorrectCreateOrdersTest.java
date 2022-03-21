@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.util.List;
+import static org.apache.http.HttpStatus.SC_CREATED;
 
 
 
@@ -41,7 +42,7 @@ public class CorrectCreateOrdersTest  {
       @Before
       public void setUp() {
         ordersClient = new OrdersClient();
-   }
+             }
 
     @After
     public void tearDown(){
@@ -52,7 +53,8 @@ public class CorrectCreateOrdersTest  {
     @DisplayName("Выполнение запроса на создание заказа с корректными значениями")
     @Description("Выполнение запроса на создание заказа с корректными значениями. Корректные значения для создания заказа постоянные, цвет самоката параметризован и изменяется {color}")
     public void ordersCreateWithValidCredentials()     {
-        Orders orders = Orders.builder()
+
+         Orders orders = Orders.builder()
                 .firstName("Naruto")
                 .lastName("Uchiha")
                 .address("Konoha, 142 apt.")
@@ -64,11 +66,11 @@ public class CorrectCreateOrdersTest  {
                 .color(colorScooter)
                 .build();
 
-        ValidatableResponse createResponse = ordersClient.createCorrectOrders(orders);
+         ValidatableResponse createResponse = ordersClient.createCorrectOrders(orders);
         int statusCode = createResponse.extract().statusCode();
         trackId = createResponse.extract().path("track");
 
-        assertThat("Курьер выполних логин, статус код:",statusCode,equalTo(201));
+        assertThat("Курьер выполнил логин, статус код:",statusCode,equalTo(SC_CREATED));
         assertThat("Идентификатор курьера ID",trackId,is(not(0)));
     }
 

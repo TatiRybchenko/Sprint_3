@@ -10,6 +10,7 @@ import sptint3.CourierClient;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertTrue;
+import static org.apache.http.HttpStatus.SC_CREATED;
 
 public class CorrectCreateCourierTest {
 
@@ -31,7 +32,7 @@ public class CorrectCreateCourierTest {
         int statusCode = createResponse.extract().statusCode();
         boolean courierOk = createResponse.extract().path("ok");
 
-        assertThat("Создание курьера выполнилось без ошибок, статус код:",statusCode,equalTo(201));
+        assertThat("Создание курьера выполнилось без ошибок, статус код:",statusCode,equalTo(SC_CREATED));
         assertTrue("Корреткное сообщениео завершение создания",courierOk);
     }
 
@@ -44,7 +45,7 @@ public class CorrectCreateCourierTest {
         int statusCode = createResponse.extract().statusCode();
         boolean courierOk = createResponse.extract().path("ok");
 
-        assertThat("Создание курьера выполнилось без ошибок, статус код:",statusCode,equalTo(201));
+        assertThat("Создание курьера выполнилось без ошибок, статус код:",statusCode,equalTo(SC_CREATED));
         assertTrue("Корреткное сообщениео завершение создания",courierOk);
     }
 
