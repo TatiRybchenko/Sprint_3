@@ -8,10 +8,11 @@ import io.restassured.response.ValidatableResponse;
 import java.lang.reflect.Type;
 
 import static io.restassured.RestAssured.given;
+import static sptint3.EndPoints.*;
 
 public class OrdersClient extends ScooterRestClient {
 
-    private static final String ORDERS_PATH = "/api/v1/orders";
+
 
     @Step("Выполнение запроса на создание заказа {orders.color}")
     public  ValidatableResponse createCorrectOrders(Orders orders){
@@ -20,7 +21,7 @@ public class OrdersClient extends ScooterRestClient {
                 .spec(getBaseSpec())
                 .body(orders)
                 .when()
-                .post(ORDERS_PATH)
+                .post(ORDERS_CREATE)
                 .then();
 }
 
@@ -30,7 +31,7 @@ public class OrdersClient extends ScooterRestClient {
         return given()
                 .spec(getBaseSpec())
                 .when()
-                .get(ORDERS_PATH + "?courierId")
+                .get(ORDERS_LIST)
                 .then();
 
     }
@@ -42,7 +43,7 @@ public class OrdersClient extends ScooterRestClient {
                 .spec(getBaseSpec())
                 .queryParam("t", trackId)
                 .when()
-                .get(ORDERS_PATH + "/track")
+                .get(ORDERS_RECEIVING)
                 .then();
     }
 
@@ -53,7 +54,7 @@ public class OrdersClient extends ScooterRestClient {
                 .spec(getBaseSpec())
                 .queryParam("t")
                 .when()
-                .get(ORDERS_PATH + "/track")
+                .get(ORDERS_RECEIVING)
                 .then();
     }
     @Step("Выполнение запроса на отмену заказа, номер трека {trackId} ")
@@ -63,7 +64,7 @@ public class OrdersClient extends ScooterRestClient {
                 .spec(getBaseSpec())
                 .queryParam("track", trackId)
                 .when()
-                .put(ORDERS_PATH + "/cancel")
+                .put(ORDERS_CANCEL)
                 .then();
     }
 
@@ -74,7 +75,7 @@ public class OrdersClient extends ScooterRestClient {
                 .spec(getBaseSpec())
                 .queryParam("t", trackId)
                 .when()
-                .get(ORDERS_PATH + "/track")
+                .get(ORDERS_RECEIVING)
                 .then();
     }
 }
