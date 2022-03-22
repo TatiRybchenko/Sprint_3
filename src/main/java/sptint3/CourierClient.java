@@ -2,8 +2,12 @@ package sptint3;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import java.util.HashMap;
+import java.util.Map;
 import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.SC_CREATED;
 import static sptint3.EndPoints.*;
+
 
 public class CourierClient extends ScooterRestClient {
 
@@ -19,13 +23,12 @@ public class CourierClient extends ScooterRestClient {
 
     @Step("Выполнение запроса на создание курьера со всеми параметрами: имя, логин, пароль.")
     public ValidatableResponse createCorrect(Courier courier) {
-        String courierLogin = courier.getLogin();
-        String courierPassword = courier.getPassword();
-        String courierFirstName = courier.getFirstName();
 
-        String requestBodyCourierLogin = "{\"login\":\"" + courierLogin + "\","
-                                    + "\"password\":\"" + courierPassword + "\","
-                                    + "\"firstName\":\"" + courierFirstName + "\"}";
+        Map<String,String> requestBodyCourierLogin = new HashMap<>();
+        requestBodyCourierLogin.put("login", courier.getLogin());
+        requestBodyCourierLogin.put("password", courier.getPassword());
+        requestBodyCourierLogin.put("firstName", courier.getFirstName());
+
         return given()
                 .spec(getBaseSpec())
                 .body(requestBodyCourierLogin)
@@ -36,11 +39,11 @@ public class CourierClient extends ScooterRestClient {
 
     @Step("Выполнение запроса на создание курьера, у которого отсутствует один из параметров: логин")
     public ValidatableResponse createFailedNoLogin(Courier courier) {
-        String courierPassword = courier.getPassword();
-        String courierFirstName = courier.getFirstName();
 
-        String requestBodyCourierLogin = "{\"password\":\"" + courierPassword + "\","
-                                    + "\"firstName\":\"" + courierFirstName + "\"}";
+        Map<String,String> requestBodyCourierLogin = new HashMap<>();
+        requestBodyCourierLogin.put("password", courier.getPassword());
+        requestBodyCourierLogin.put("firstName", courier.getFirstName());
+
         return given()
                 .spec(getBaseSpec())
                 .body(requestBodyCourierLogin)
@@ -51,11 +54,11 @@ public class CourierClient extends ScooterRestClient {
 
     @Step("Выполнение запроса на создание курьера, у которого отсутствует один из параметров: пароль")
     public ValidatableResponse createFailedNoPassword(Courier courier) {
-        String courierLogin = courier.getLogin();
-        String courierFirstName = courier.getFirstName();
 
-        String requestBodyCourierLogin = "{\"login\":\"" + courierLogin + "\","
-                                    + "\"firstName\":\"" + courierFirstName + "\"}";
+        Map<String,String> requestBodyCourierLogin = new HashMap<>();
+        requestBodyCourierLogin.put("login", courier.getLogin());
+        requestBodyCourierLogin.put("firstName", courier.getFirstName());
+
         return given()
                 .spec(getBaseSpec())
                 .body(requestBodyCourierLogin)
@@ -66,11 +69,11 @@ public class CourierClient extends ScooterRestClient {
 
     @Step("Выполнение запроса на создание курьера, у которого отсутствует один из параметров: имя")
     public ValidatableResponse createFailedNoFirstName(Courier courier) {
-        String courierLogin = courier.getLogin();
-        String courierPassword = courier.getPassword();
 
-        String requestBodyCourierLogin = "{\"login\":\"" + courierLogin + "\","
-                                    + "\"password\":\"" + courierPassword + "\"}";
+        Map<String,String> requestBodyCourierLogin = new HashMap<>();
+        requestBodyCourierLogin.put("login", courier.getLogin());
+        requestBodyCourierLogin.put("password", courier.getPassword());
+
         return given()
                 .spec(getBaseSpec())
                 .body(requestBodyCourierLogin)
@@ -97,4 +100,5 @@ public class CourierClient extends ScooterRestClient {
                        .delete(COURIER_DELETE)
                        .then();
     }
+
 }

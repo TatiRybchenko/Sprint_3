@@ -18,6 +18,7 @@ import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 public class FailedCreateCourierTest {
 
     private CourierClient courierClient;
+    private final String LOGIN = "null";
 
     @Before
     public void setUp() {
@@ -30,6 +31,7 @@ public class FailedCreateCourierTest {
     public void courierFailedCredentialsNoLogin() {
 
         Courier courier = Courier.builder()
+                .login(LOGIN)
              .password(RandomStringUtils.randomAlphabetic(10))
              .firstName(RandomStringUtils.randomAlphabetic(10))
              .build();
@@ -46,6 +48,7 @@ public class FailedCreateCourierTest {
     @DisplayName("Создание курьера, у которого отсутствует один из передаваемых параметров для создания: логин")
     @Description("Необходимо описание что делает тест")
     public void courierFailedCredentialsNoAccountsLogin() {
+
         Courier courier = Courier.getRandom();
 
         ValidatableResponse createResponse = courierClient.createFailedNoLogin(courier);

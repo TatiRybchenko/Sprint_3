@@ -18,7 +18,7 @@ import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 public class FailedDeleteCourierTest {
 
     private CourierClient courierClient;
-    private final int courierId = 0;
+    private final int COURIER_ID = 0;
 
 
     @Before
@@ -31,7 +31,7 @@ public class FailedDeleteCourierTest {
     @Description("Выполнение запроса на удаление курьера с некорректными значениями. courierId = 0 ")
     public void courierFailedDeleteCredentialsNoCourierId() {
 
-        ValidatableResponse deleteResponse = courierClient.delete(courierId);
+        ValidatableResponse deleteResponse = courierClient.delete(COURIER_ID);
         int statusCode = deleteResponse.extract().statusCode();
         String errorMessage = deleteResponse.extract().path("message");
 
@@ -45,7 +45,7 @@ public class FailedDeleteCourierTest {
     @Issue("Тест написан корректно, информация о некорректном поведение системы передана в поддержку для исправления, не выводится корреткное сообщение")
     public void courierFailedDeleteCredentialsCourierIdNull() {
 
-        ValidatableResponse deleteResponse = courierClient.deleteFailedINull(courierId);
+        ValidatableResponse deleteResponse = courierClient.deleteFailedINull(COURIER_ID);
         int statusCode = deleteResponse.extract().statusCode();
         String errorMessage = deleteResponse.extract().path("message");
 
