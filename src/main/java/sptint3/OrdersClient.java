@@ -63,29 +63,36 @@ public class OrdersClient extends ScooterRestClient {
                 .then();
     }
 
-    @Step("Выполнение запроса на отмену заказа, который уже в работе номер трека {trackId} ")
-    public static ValidatableResponse cancelFailedOrdersInWork(int trackId){
+    @Step("Выполнение запроса на принятие заказа по id заказа {ordersId} и id курьера {courierId} ")
+    public static ValidatableResponse acceptOrderByNumber(int orderId, int courierId){
 
         return given()
                 .spec(getBaseSpec())
-                .queryParam("track", trackId)
+                .queryParam("courierId", courierId)
                 .when()
-                .put(ORDERS_CANCEL)
-                .then()
-                .assertThat()
-                .statusCode(SC_CONFLICT)
-                .extract()
-                .path("message");
+                .put(ACCEPT_ORDER + orderId)
+                .then();
+    }
+
+    @Step("Выполнение запроса на приянтие заказа, нет ID заказа {trackId} ")
+    public static ValidatableResponse acceptOrderNoOrderId(int courierId){
+
+        return given()
+                .spec(getBaseSpec())
+                .queryParam("courierId", courierId)
+                .when()
+                .put(ACCEPT_ORDER)
+                .then();
+
     }
 
     @Step("Выполнение запроса на принятие заказа по id заказа {ordersId} и id курьера {courierId} ")
-    public static ValidatableResponse acceptOrderByNumber(int orderID, int courierID){
+    public static ValidatableResponse acceptOrderNoCourierId(int orderId){
 
         return given()
                 .spec(getBaseSpec())
-                .queryParam("courierId", courierID)
                 .when()
-                .put(ACCEPT_ORDER + orderID)
+                .put(ACCEPT_ORDER + orderId)
                 .then();
     }
 

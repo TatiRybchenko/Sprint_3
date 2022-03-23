@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import sptint3.*;
-
 import java.util.List;
 import static java.lang.String.valueOf;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -65,9 +64,11 @@ public class CorrectAcceptOrderTest {
         int statusCode = acceptOrderResponse.extract().statusCode();
         boolean ordersOk =  acceptOrderResponse.extract().path("ok");
 
-        assertThat("Запрос на получение заказа по его номеру выполнен, статус код:", statusCode, equalTo(SC_OK));
+        assertThat("Запрос на принятие заказа по ID заказа и ID курьера, статус код:", statusCode, equalTo(SC_OK));
         assertTrue("Корреткное сообщение о завершение создания", ordersOk);
 
     }
+
+
 
 }
