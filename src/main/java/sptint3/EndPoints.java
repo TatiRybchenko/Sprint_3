@@ -9,5 +9,6 @@ public class EndPoints {
     public static final String ORDERS_RECEIVING = "/api/v1/orders/track";
     public static final String ORDERS_CANCEL = "/api/v1/orders/cancel";
     public static final String ORDERS_LIST = "/api/v1/orders";
+    public static final String ACCEPT_ORDER = "/api/v1/orders/accept/";
 
 }

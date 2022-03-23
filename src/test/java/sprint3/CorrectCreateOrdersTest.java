@@ -70,8 +70,8 @@ public class CorrectCreateOrdersTest  {
         int statusCode = createResponse.extract().statusCode();
         trackId = createResponse.extract().path("track");
 
-        assertThat("Курьер выполнил логин, статус код:",statusCode,equalTo(SC_CREATED));
-        assertThat("Идентификатор курьера ID",trackId,is(not(0)));
+        assertThat("Курьер выполнил логин, статус код:", statusCode, equalTo(SC_CREATED));
+        assertThat("Идентификатор курьера ID", trackId, is(not(0)));
     }
 
 

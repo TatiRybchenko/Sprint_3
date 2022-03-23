@@ -38,8 +38,8 @@ public class CorrectDeleteCourierTest {
         int statusCode = deleteResponse.extract().statusCode();
         boolean courierOk = deleteResponse.extract().path("ok");
 
-        assertThat("Удаление курьера выполнилось без ошибок, статус код:",statusCode,equalTo(SC_OK));
-        assertTrue("Корреткное сообщениео завершение создания",courierOk);
+        assertThat("Удаление курьера выполнилось без ошибок, статус код:", statusCode, equalTo(SC_OK));
+        assertTrue("Корреткное сообщениео завершение создания", courierOk);
 
     }
 }

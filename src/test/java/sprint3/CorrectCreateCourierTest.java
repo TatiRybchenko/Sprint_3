@@ -33,7 +33,7 @@ public class CorrectCreateCourierTest {
         boolean courierOk = createResponse.extract().path("ok");
 
         assertThat("Создание курьера выполнилось без ошибок, статус код:",statusCode,equalTo(SC_CREATED));
-        assertTrue("Корреткное сообщениео завершение создания",courierOk);
+        assertTrue("Корреткное сообщение о завершение создания",courierOk);
     }
 
     @Test

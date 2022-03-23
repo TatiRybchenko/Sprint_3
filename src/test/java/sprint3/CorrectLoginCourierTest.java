@@ -41,8 +41,8 @@ public class CorrectLoginCourierTest {
        int statusCode = loginResponse.extract().statusCode();
        courierId = loginResponse.extract().path("id");
 
-        assertThat("Курьер выполних логин, статус код:",statusCode,equalTo(SC_OK));
-        assertThat("Идентификатор курьера ID",courierId,is(not(0)));
+        assertThat("Курьер выполних логин, статус код:", statusCode, equalTo(SC_OK));
+        assertThat("Идентификатор курьера ID", courierId, is(not(0)));
 
     }
 

@@ -7,23 +7,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import sptint3.*;
-import java.util.Collections;
+
 import java.util.List;
 import static java.lang.String.valueOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.junit.Assert.assertTrue;
 
 
-public class CorrectReceivingOrderByNumberTest {
+public class CorrectAcceptOrderTest {
 
     private CourierClient courierClient;
-    private int orderID;
     private Courier courier;
     private OrdersClient ordersClient;
     private Orders orders;
     private int courierId;
     private int trackId;
+    private int orderID;
 
     @Before
     public void setUp() {
@@ -46,25 +47,27 @@ public class CorrectReceivingOrderByNumberTest {
                 .build();
         ValidatableResponse createResponse = ordersClient.createCorrectOrders(orders);
         trackId = createResponse.extract().path("track");
+        ValidatableResponse receivingOrderResponse = OrdersClient.receivingOrderByNumber(trackId);
+        orderID = receivingOrderResponse.extract().jsonPath().getInt("order.id");
     }
 
-    @After
-    public void tearDown(){
-        courierClient.delete(courierId);
-        OrdersClient.cancelCorrectOrders(trackId);
-           }
-
+        @After
+        public void tearDown(){
+            courierClient.delete(courierId);
+            OrdersClient.cancelCorrectOrders(trackId);
+        }
     @Test
-    @DisplayName("Выполнение запроса на получение заказа по его номеру, с корректными значениями")
-    @Description("Выполнение запроса на получение заказа по его номеру, с корректными значениями. Корректные значения для создания и входа генерируется рандомно. Данные по заказу создаются с постоянными значениями")
-    public void  receivingOrderWithValidCredentials() {
+    @DisplayName("Выполнение запроса на принятие заказа по ID заказа и ID курьера, с корректными значениями")
+    @Description("Выполнение запроса на принятие заказа по ID заказа и ID курьера, с корректными значениями. Корректные значения для создания курьера и его логина генерируется рандомно. Данные по заказу создаются с постоянными значениями.")
+    public void  acceptOrderWithValidCredentials() {
 
-        ValidatableResponse receivingOrderResponse = OrdersClient.receivingOrderByNumber(trackId);
-        int statusCode = receivingOrderResponse.extract().statusCode();
-        int orderID = receivingOrderResponse.extract().jsonPath().getInt("order.id");
+        ValidatableResponse acceptOrderResponse = OrdersClient.acceptOrderByNumber(orderID, courierId);
+        int statusCode = acceptOrderResponse.extract().statusCode();
+        boolean ordersOk =  acceptOrderResponse.extract().path("ok");
 
         assertThat("Запрос на получение заказа по его номеру выполнен, статус код:", statusCode, equalTo(SC_OK));
-        assertThat("Значение возвращаемого тела не пустое",orderID, notNullValue());
+        assertTrue("Корреткное сообщение о завершение создания", ordersOk);
 
     }
+
 }

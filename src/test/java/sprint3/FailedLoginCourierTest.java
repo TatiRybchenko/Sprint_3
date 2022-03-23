@@ -39,8 +39,8 @@ public class FailedLoginCourierTest {
         int statusCode = loginResponse.extract().statusCode();
         String errorMessage = loginResponse.extract().path("message");
 
-        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
-        assertEquals("Недостаточно данных для входа",errorMessage);
+        assertThat("Логин курьера не выполнился, статус код:", statusCode, equalTo(SC_BAD_REQUEST));
+        assertEquals("Недостаточно данных для входа", errorMessage);
     }
 
     @Test
@@ -57,8 +57,8 @@ public class FailedLoginCourierTest {
         int statusCode = loginResponse.extract().statusCode();
         String errorMessage = loginResponse.extract().path("message");
 
-        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
-        assertEquals("Недостаточно данных для входа",errorMessage);
+        assertThat("Логин курьера не выполнился, статус код:", statusCode, equalTo(SC_BAD_REQUEST));
+        assertEquals("Недостаточно данных для входа", errorMessage);
 
     }
 
@@ -76,8 +76,8 @@ public class FailedLoginCourierTest {
         int statusCode = loginResponse.extract().statusCode();
         String errorMessage = loginResponse.extract().path("message");
 
-        assertThat("Логин курьера не выполнился, статус код:",statusCode,equalTo(SC_NOT_FOUND));
-        assertEquals("Учетная запись не найдена",errorMessage);
+        assertThat("Логин курьера не выполнился, статус код:", statusCode, equalTo(SC_NOT_FOUND));
+        assertEquals("Учетная запись не найдена", errorMessage);
 
     }
 }

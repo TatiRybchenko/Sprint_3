@@ -5,7 +5,6 @@ import io.restassured.response.ValidatableResponse;
 import java.util.HashMap;
 import java.util.Map;
 import static io.restassured.RestAssured.given;
-import static org.apache.http.HttpStatus.SC_CREATED;
 import static sptint3.EndPoints.*;
 
 

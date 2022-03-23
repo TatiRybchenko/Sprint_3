@@ -1,17 +1,12 @@
 package sptint3;
 
-import io.qameta.allure.Issue;
+
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-
-
-import java.lang.reflect.Type;
-
 import static io.restassured.RestAssured.given;
 import static sptint3.EndPoints.*;
-
+import static org.apache.http.HttpStatus.SC_CONFLICT;
 public class OrdersClient extends ScooterRestClient {
-
 
 
     @Step("Выполнение запроса на создание заказа {orders.color}")
@@ -68,14 +63,30 @@ public class OrdersClient extends ScooterRestClient {
                 .then();
     }
 
-    @Step("Выполнение запроса на принятие заказа по id заказа {orderId} и id курьера {courierId} ")
-    public static ValidatableResponse acceptOrderByNumber(int trackId){
+    @Step("Выполнение запроса на отмену заказа, который уже в работе номер трека {trackId} ")
+    public static ValidatableResponse cancelFailedOrdersInWork(int trackId){
 
         return given()
                 .spec(getBaseSpec())
-                .queryParam("t", trackId)
+                .queryParam("track", trackId)
                 .when()
-                .get(ORDERS_RECEIVING)
+                .put(ORDERS_CANCEL)
+                .then()
+                .assertThat()
+                .statusCode(SC_CONFLICT)
+                .extract()
+                .path("message");
+    }
+
+    @Step("Выполнение запроса на принятие заказа по id заказа {ordersId} и id курьера {courierId} ")
+    public static ValidatableResponse acceptOrderByNumber(int orderID, int courierID){
+
+        return given()
+                .spec(getBaseSpec())
+                .queryParam("courierId", courierID)
+                .when()
+                .put(ACCEPT_ORDER + orderID)
                 .then();
     }
+
 }

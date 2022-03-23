@@ -3,6 +3,7 @@ package sprint3;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
+import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 import sptint3.OrdersClient;
@@ -30,8 +31,10 @@ public class GetListOrdersTest {
         int statusCode = createOrderResponse.extract().statusCode();
         String ordersListId = createOrderResponse.extract().jsonPath().getString("orders.id");
 
-        assertThat("Успешное выполнение запроса на получение списка заказов, статус код:",statusCode,equalTo(SC_OK));
-        assertThat("Значение возвращаемого тела не пустое",ordersListId, notNullValue());
+
+        assertThat("Успешное выполнение запроса на получение списка заказов, статус код:", statusCode, equalTo(SC_OK));
+        assertThat("Значение возвращаемого тела не пустое", ordersListId, notNullValue());
+
     }
 
 }

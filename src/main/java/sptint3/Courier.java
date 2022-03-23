@@ -2,10 +2,10 @@ package sptint3;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
-
 import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.lang3.RandomStringUtils;
+
 @Data
 @Builder
 public class Courier {

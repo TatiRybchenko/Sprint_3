@@ -35,8 +35,8 @@ public class FailedDeleteCourierTest {
         int statusCode = deleteResponse.extract().statusCode();
         String errorMessage = deleteResponse.extract().path("message");
 
-        assertThat("Удаление курьера не выполнилось, статус код:",statusCode,equalTo(SC_NOT_FOUND));
-        assertEquals("Курьера с таким id нет.",errorMessage);
+        assertThat("Удаление курьера не выполнилось, статус код:",statusCode, equalTo(SC_NOT_FOUND));
+        assertEquals("Курьера с таким id нет.", errorMessage);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class FailedDeleteCourierTest {
         int statusCode = deleteResponse.extract().statusCode();
         String errorMessage = deleteResponse.extract().path("message");
 
-        assertThat("Удаление курьера не выполнилось, статус код:",statusCode,equalTo(SC_BAD_REQUEST));
-        assertEquals("Недостаточно данных для удаления курьера",errorMessage);
+        assertThat("Удаление курьера не выполнилось, статус код:", statusCode, equalTo(SC_BAD_REQUEST));
+        assertEquals("Недостаточно данных для удаления курьера", errorMessage);
     }
 }

@@ -76,8 +76,8 @@ public class FailedReceivingOrderByNumberTest {
         int statusCode = receivingOrderResponse.extract().statusCode();
         String errorMessage = receivingOrderResponse.extract().path("message");
 
-        assertThat("Получить заказ по его номеру не получилось, статус код:",statusCode,equalTo(SC_NOT_FOUND));
-        assertEquals("Заказ не найден",errorMessage);
+        assertThat("Получить заказ по его номеру не получилось, статус код:", statusCode, equalTo(SC_NOT_FOUND));
+        assertEquals("Заказ не найден", errorMessage);
     }
 
 }
